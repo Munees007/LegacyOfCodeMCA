@@ -1,0 +1,40 @@
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400..900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body{
+  overflow: hidden;
+}
+.bgBreakTimer{
+  background-image: url('/assets/images/Leonardo_Phoenix_A_futuristic_hightech_illustration_of_a_futur_2-Photoroom.png');
+  background-size: contain;
+}
+.bgBreakTimerC
+{
+  background-image: url('/assets/images/image-removebg-preview.png');
+  background-size: cover;
+}
+@layer utilities {
+    @keyframes scroll {
+      0% {
+        transform: translateY(100%);
+      }
+      100% {
+        transform: translateY(-100%);
+      }
+    }
+  
+    .animate-scroll {
+      animation: scroll 20s linear infinite;
+    }
+  }
+
+.adminImg{
+  background-image: url("/assets/images/adminbg.webp");
+  background-size: cover;
+}
+
+
