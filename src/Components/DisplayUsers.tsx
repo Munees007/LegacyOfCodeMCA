@@ -52,40 +52,44 @@ const DisplayUsers: React.FC<DisplayUsersProps> = ({ userData, levelData, displa
     const [Dates,setDates] = useState<string[]>([]);
 
     const sortByScore = () => {
-        return [...userData].sort((a, b) => getScore(b) - getScore(a)); // Highest score first
-    };
+      const data = seperateDataWithDate();
+      return [...data].sort((a, b) => getScore(b) - getScore(a)); // Highest score first
+  };
 
-    const sortByTotalLines = () => {
-        return [...userData].sort((a, b) => getTotalLine(a) - getTotalLine(b)); // Smallest first
-    };
+  const sortByTotalLines = () => {
+    const data = seperateDataWithDate();
+      return [...data].sort((a, b) => getTotalLine(a) - getTotalLine(b)); // Smallest first
+  };
 
-    const sortByTimeTaken = () => {
-        return [...userData].sort((a, b) => {
-            const timeA = (60 * 60) - a.codeData?.timeLeft!;
-            const timeB = (60 * 60) - b.codeData?.timeLeft!;
-            return timeA - timeB; // Smallest first
-        });
-    };
-    const sortByScoreAndTime = () => {
-        return [...userData].sort((a, b) => {
-            // Get scores
-            const scoreA = getScore(a);
-            const scoreB = getScore(b);
-    
-            // Sort by score first (highest score first)
-            if (scoreB !== scoreA) {
-                return scoreB - scoreA;
-            }
-    
-            // If scores are equal, sort by time taken (smallest first)
-            const timeA = (60 * 60) - a.codeData?.timeLeft!;
-            const timeB = (60 * 60) - b.codeData?.timeLeft!;
-            return timeA - timeB; // Smallest first
-        });
-    };
+  const sortByTimeTaken = () => {
+    const data = seperateDataWithDate();
+      return [...data].sort((a, b) => {
+          const timeA = (60 * 60) - (a.codeData?.timeLeft !==undefined ? a.codeData.timeLeft : (60*60));
+          const timeB = (60 * 60) - (b.codeData?.timeLeft !== undefined ? b.codeData.timeLeft : (60*60));
+          return timeA - timeB; // Smallest first
+      });
+  };
+  const sortByScoreAndTime = () => {
+    const data = seperateDataWithDate();
+      return [...data].sort((a, b) => {
+          // Get scores
+          const scoreA = getScore(a);
+          const scoreB = getScore(b);
+  
+          // Sort by score first (highest score first)
+          if (scoreB !== scoreA) {
+              return scoreB - scoreA;
+          }
+  
+          // If scores are equal, sort by time taken (smallest first)
+          const timeA = (60 * 60) - (a.codeData?.timeLeft !== undefined ? a.codeData?.timeLeft : 0);
+          const timeB = (60 * 60) - (b.codeData?.timeLeft !== undefined ? b.codeData?.timeLeft : 0);
+          return timeA - timeB; // Smallest first
+      });
+  };
 
     const seperateDataWithDate = () =>{
-        return [...userData].filter((item)=>{
+        return selectedDate === "all" ? userData : [...userData].filter((item)=>{
             const timeStamp = item.formData.timestamp;
             if(typeof timeStamp === 'number')
             {
@@ -251,21 +255,11 @@ const DisplayUsers: React.FC<DisplayUsersProps> = ({ userData, levelData, displa
 
             setSortedData(sortedData!);
         }
-        if(selectedDate === "all")
-        {
-           setSortedData(userData)
-        }
-        else
-        {  
-            sortedData = seperateDataWithDate();
-            setSortedData(sortedData);
-        }
     }, [userData, sortMethod, display,selectedDate]);
 
 
     return (
         <div className="w-full overflow-auto">
-            <button onClick={()=>{sortByDate()}}>click</button>
             <PDFDownloadLink
         document={<PdfDocument sortedData={sortedData} levelData={levelData} />}
         fileName="data.pdf"
