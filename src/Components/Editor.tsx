@@ -240,7 +240,7 @@ const Editor: React.FC<EditorProps> = ({useLevel,levelIndex, ExecuteCode, Result
     { label: "Monokai", value: "monokai" },
   ];
   const languages = [
-    { label: "C++", value: "cpp" },
+    { label: "C", value: "cpp" },
     { label: "Python", value: "python" },
   ];
 
