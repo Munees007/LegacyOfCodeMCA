@@ -61,8 +61,8 @@ const DisplayUsers: React.FC<DisplayUsersProps> = ({ userData, levelData, displa
 
     const sortByTimeTaken = () => {
         return [...userData].sort((a, b) => {
-            const timeA = (60 * 150) - a.codeData?.timeLeft!;
-            const timeB = (60 * 150) - b.codeData?.timeLeft!;
+            const timeA = (60 * 60) - a.codeData?.timeLeft!;
+            const timeB = (60 * 60) - b.codeData?.timeLeft!;
             return timeA - timeB; // Smallest first
         });
     };
@@ -78,8 +78,8 @@ const DisplayUsers: React.FC<DisplayUsersProps> = ({ userData, levelData, displa
             }
     
             // If scores are equal, sort by time taken (smallest first)
-            const timeA = (60 * 150) - a.codeData?.timeLeft!;
-            const timeB = (60 * 150) - b.codeData?.timeLeft!;
+            const timeA = (60 * 60) - a.codeData?.timeLeft!;
+            const timeB = (60 * 60) - b.codeData?.timeLeft!;
             return timeA - timeB; // Smallest first
         });
     };
@@ -228,7 +228,7 @@ const DisplayUsers: React.FC<DisplayUsersProps> = ({ userData, levelData, displa
           key: "timeLeft",
           render: (_, record) => {
             return (
-              <span>{formatTime((60 * 150) - record?.codeData?.timeLeft!)}</span>
+              <span>{formatTime((60 * 60) - record?.codeData?.timeLeft!)}</span>
             );
           },
         },
@@ -273,7 +273,7 @@ const DisplayUsers: React.FC<DisplayUsersProps> = ({ userData, levelData, displa
       >
         Downloding PDF
       </PDFDownloadLink>
-            <p className="text-center font-Roboto text-2xl font-exdivabold">{display ? "Hackathon Score" : "Registered Student Lists"}</p>
+            <p className="text-center font-Roboto text-2xl font-exdivabold">{display ? "Legacy of Code" : "Registered Student Lists"}</p>
             {!display && (
                 <div className="w-full gap-2 flex justify-end p-2">
                     <p className="font-Roboto font-bold">START:</p>
@@ -364,7 +364,7 @@ const DisplayUsers: React.FC<DisplayUsersProps> = ({ userData, levelData, displa
               fontSize: 30,
               fontWeight: 'extrabold',
               marginTop: 3
-            }}>INTRA HACKATHON-2k24</Text>
+            }}>LEGACY OF CODE MCA</Text>
             <Text style={{
               textAlign: 'center',
               fontSize: 25,
@@ -442,7 +442,7 @@ const DisplayUsers: React.FC<DisplayUsersProps> = ({ userData, levelData, displa
                   height: 40,
                   textAlign: 'center',
                   paddingTop: 7
-                }}>{formatTime((60 * 150) - value?.codeData?.timeLeft!)}</Text>
+                }}>{formatTime((60 * 60) - value?.codeData?.timeLeft!)}</Text>
               </View>
             ))}
           </View>
